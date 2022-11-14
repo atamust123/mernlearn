@@ -14,6 +14,7 @@ export default class RestaurantDataService {
     }
 
     createReview(data) {
+        console.log(data)// todo burada çözemediğin bir hata var bak
         return http.post("/review", data)
     }
 
@@ -22,7 +23,7 @@ export default class RestaurantDataService {
     }
 
     deleteReview(id, userId) {
-        return http.delete(`/review?id=${id}`)
+        return http.delete(`/review?id=${id}`, { data: { user_id: userId } })
     }
 
     getCuisines() {

@@ -14,6 +14,10 @@ export function useApp() {
     const router = createBrowserRouter([
         {
             exact: true,
+            path: "/",
+            element: <RestaurantList />
+        }, {
+            exact: true,
             path: "/restaurants",
             element: <RestaurantList />
         }, {

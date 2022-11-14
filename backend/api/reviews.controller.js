@@ -3,6 +3,7 @@ import ReviewsDAO from "../dao/reviewsDAO.js"
 export default class RestaurantsController {
     static async apiPostReview(req, res, next) {
         try {
+            console.log("req.body", req.body)
             const restaurantId = req.body.restaurant_id
             const review = req.body.text
             const userInfo = {
@@ -47,9 +48,8 @@ export default class RestaurantsController {
 
     static async apiDeleteReview(req, res, next) {
         try {
-            const reviewId = req.query._id
+            const reviewId = req.query.id
             const userId = req.body.user_id
-            console.log(reviewId)
             const ReviewResponse = await ReviewsDAO.deleteReview(reviewId, userId)
             res.json({ status: "success" })
         } catch (e) {

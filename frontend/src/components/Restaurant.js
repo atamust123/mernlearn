@@ -14,7 +14,7 @@ export const Restaurant = (props) => {
 
     const [restaurant, setRestaurant] = useState(initialRestaurantState)
     const getRestaurant = id => {
-        restaurantDataService.get(id).then(res => { setRestaurant(res.data); console.log("restaurantDataService.get", res.data) }).catch(err => console.log(err))
+        restaurantDataService.get(id).then(res => { setRestaurant(res.data); }).catch(err => console.log(err))
     }
     useEffect(() => { getRestaurant(restaurant_id) }, [restaurant_id])
     const deleteReview = (reviewId, index) => {
@@ -52,12 +52,10 @@ export const Restaurant = (props) => {
                                                 </p>
                                                 {props.user?.id === review.user_id &&
                                                     <div className="row">
-                                                        <a target="_blank" rel="noreferrer" href="https://www.google.com" onClick={() => deleteReview(review._id, index)} className="btn btn-primary col-lg-5 mx-1 mb-1">Delete</a>
+                                                        <button onClick={() => deleteReview(review._id, index)} className="btn btn-primary col-lg-5 mx-1 mb-1">Delete</button>
                                                         <Link to={{
                                                             pathname: "/restaurants/" + restaurant_id + "/review",
-                                                            state: {
-                                                                currentReview: review
-                                                            }
+                                                            state: { currentReview: review }
                                                         }} className="btn btn-primary col-lg-5 mx-1 mb-1">Edit</Link>
                                                     </div>
                                                 }
