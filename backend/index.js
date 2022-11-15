@@ -12,7 +12,6 @@ MongoClient.connect(
     {
         maxPoolSize: 50,
         wtimeoutMS: 2500,
-        useNewUrlParser: true
     }
 ).catch(err => {
     console.error(err.stack)
@@ -21,6 +20,6 @@ MongoClient.connect(
     await RestaurantsDAO.injectDB(client)
     await ReviewsDAO.injectDB(client)
     app.listen(port, () => {
-        console.log(`listening on port ${port}`)
+        (`listening on port ${port}`)
     })
 })
