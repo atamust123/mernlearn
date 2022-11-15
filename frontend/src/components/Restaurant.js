@@ -53,10 +53,12 @@ export const Restaurant = (props) => {
                                                 {props.user?.id === review.user_id &&
                                                     <div className="row">
                                                         <button onClick={() => deleteReview(review._id, index)} className="btn btn-primary col-lg-5 mx-1 mb-1">Delete</button>
-                                                        <Link to={{
-                                                            pathname: "/restaurants/" + restaurant_id + "/review",
-                                                            state: { currentReview: review }
-                                                        }} className="btn btn-primary col-lg-5 mx-1 mb-1">Edit</Link>
+                                                        <Link
+                                                            className="btn btn-primary col-lg-5 mx-1 mb-1"
+                                                            state={{ currentReview: review }}
+                                                            to={{
+                                                                pathname: "/restaurants/" + restaurant_id + "/review",
+                                                            }}>Edit</Link>
                                                     </div>
                                                 }
                                             </div>

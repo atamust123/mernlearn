@@ -5,13 +5,13 @@ import RestaurantDataService from "../services/restaurants"
 const restaurantDataService = new RestaurantDataService()
 export const AddReview = (props) => {
 
-    const { location: { state: { currentReview = undefined } = {} } = {}, user: { name: userName = "", id: userId = "" } } = props || {}
+    const { user } = props || {}
     const { id: restaurantId } = useParams() || {}
     let initialReviewState = ""
     let editing = false
-    if (currentReview) {
+    if (window.history?.state?.usr?.currentReview) {
         editing = true
-        initialReviewState = currentReview.text
+        initialReviewState = window.history?.state?.usr?.currentReview.text
     }
     const [review, setReview] = useState(initialReviewState);
     const [submitted, setSubmitted] = useState(false)
@@ -19,12 +19,12 @@ export const AddReview = (props) => {
     const saveReview = () => {
         const data = {
             text: review,
-            name: userName,
-            user_id: userId,
-            restaurant_id: restaurantId
+            name: user?.name ?? "",
+            user_id: user?.id ?? "",
+            restaurant_id: restaurantId ?? ""
         }
         if (editing) {
-            data.review_id = currentReview._id
+            data.review_id = window.history?.state?.usr?.currentReview._id
             restaurantDataService.updateReview(data).then(res => { setSubmitted(true); }).catch(err => console.log(err))
         } else {
             restaurantDataService.createReview(data).then(res => { setSubmitted(true); }).catch(err => console.log(err))
